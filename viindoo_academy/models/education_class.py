@@ -52,6 +52,7 @@ class EducationClass(models.Model):
     students_count = fields.Integer(string='Students Count', compute='_compute_students_count', store=True)
     
     company_id = fields.Many2one('res.company', string='Company', default=lambda self: self.env.company)
+    enrollment_ids = fields.One2many('education.enrollment', 'class_id', readonly=True)
 
     @api.depends('student_ids')
     def _compute_students_count(self):

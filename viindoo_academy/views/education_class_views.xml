@@ -18,8 +18,6 @@
 				</tree>
 			</field>
 		</record>
-
-
 		<record id="education_class_view_form" model="ir.ui.view">
 			<field name="name">education.class.form</field>
 			<field name="model">education.class</field>
@@ -52,16 +50,14 @@
 							<field name="company_id" />
 						</group>
 						<notebook>
-							<page name="student" string="Students">
-								<field name="student_ids">
-									<tree editable="top">
-										<field name="name" />
-										<field name="create_date" />
-										<field name="create_uid" />
+							<page name="enrollment_students" string="Students">
+								<field name="enrollment_ids">
+									<tree>	
+										<field name="student_id" 	/>	
+										<field name="date" string="Enrollment Date" />
 									</tree>
 								</field>
 							</page>
-
 							<page name="students" string="Historical Students">
 								<field name="historical_student_ids">
 									<tree>
@@ -148,8 +144,5 @@
 
 		<menuitem id="education_class_menu"
 			action="education_class_action" parent="root_menu" sequence="10" />
-
-
-
 	</data>
 </odoo>

@@ -1,4 +1,5 @@
 from odoo import models, fields, api
+from odoo.exceptions import ValidationError
 
 
 class EducationStudent(models.Model):
@@ -24,9 +25,10 @@ class EducationStudent(models.Model):
     ethnic_code = fields.Char(related='ethnic_id.code', store=True)
     
     ethnic_code2 = fields.Char(compute='_compute_ethnic_code2', store=True)
+    enrollment_ids = fields.One2many('education.enrollment', 'student_id', readonly=True)
     
     @api.depends('ethnic_id')
     def _compute_ethnic_code2(self):
         for r in self:
             r.ethnic_code2 = r.ethnic_id.code
-    
+
