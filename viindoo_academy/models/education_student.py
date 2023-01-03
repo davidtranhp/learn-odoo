@@ -26,9 +26,21 @@ class EducationStudent(models.Model):
     
     ethnic_code2 = fields.Char(compute='_compute_ethnic_code2', store=True)
     enrollment_ids = fields.One2many('education.enrollment', 'student_id', readonly=True)
+
+    enroll_class_ids = fields.Many2many(
+        comodel_name='education.class',
+        inverse_name='enroll_class_rel',
+        string='Students',
+        help="The students that belong to the class.",
+        compute='_compute_enroll_class_ids')
     
     @api.depends('ethnic_id')
     def _compute_ethnic_code2(self):
         for r in self:
             r.ethnic_code2 = r.ethnic_id.code
+
+    @api.constrains('enrollment_ids')
+    def _compute_enroll_class_ids(self):
+        for r in self:
+            r.enroll_class_ids = enrollment_ids.student_ids
 

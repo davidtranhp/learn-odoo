@@ -40,7 +40,8 @@ class EducationClass(models.Model):
         comodel_name='education.student',
         inverse_name='class_id',
         string='Students',
-        help="The students that belong to the class.")
+        help="The students that belong to the class.",
+        compute='_compute_student_ids')
     
     historical_student_ids = fields.Many2many(
         comodel_name='education.student',
@@ -52,7 +53,15 @@ class EducationClass(models.Model):
     students_count = fields.Integer(string='Students Count', compute='_compute_students_count', store=True)
     
     company_id = fields.Many2one('res.company', string='Company', default=lambda self: self.env.company)
+    
     enrollment_ids = fields.One2many('education.enrollment', 'class_id', readonly=True)
+    
+    enroll_student_ids = fields.Many2many(
+        comodel_name='education.student',
+        inverse_name='enroll_student_rel',
+        string='Students',
+        help="The students that belong to the class.",
+        compute='_compute_enroll_student_ids')
 
     @api.depends('student_ids')
     def _compute_students_count(self):
@@ -66,9 +75,12 @@ class EducationClass(models.Model):
             if r.start_date and r.end_date and r.start_date > r.end_date:
                 raise UserError("The start date must NOT be later than the end date")
 
-    
-    
-    
-    
-    
+    @api.constrains('enrollment_ids')
+    def _compute_enroll_student_ids(self):
+        for r in self:
+            r.enroll_student_ids = enrollment_ids.student_ids
+
+
+
+
 
