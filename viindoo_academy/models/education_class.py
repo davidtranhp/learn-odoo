@@ -1,5 +1,6 @@
 from odoo import models, fields, api
 from odoo.exceptions import UserError
+from pip._vendor.typing_extensions import Required
 
 
 
@@ -40,8 +41,7 @@ class EducationClass(models.Model):
         comodel_name='education.student',
         inverse_name='class_id',
         string='Students',
-        help="The students that belong to the class.",
-        compute='_compute_student_ids')
+        help="The students that belong to the class.")
     
     historical_student_ids = fields.Many2many(
         comodel_name='education.student',
@@ -62,7 +62,9 @@ class EducationClass(models.Model):
         string='Students',
         help="The students that belong to the class.",
         compute='_compute_enroll_student_ids')
-
+    
+    course_id = fields.Many2One('education.course', required=True)
+    
     @api.depends('student_ids')
     def _compute_students_count(self):
         for r in self:
