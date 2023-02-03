@@ -32,7 +32,7 @@
         'views/education_student_views.xml',
         'views/education_enrollment_views.xml',
         'reports/academy_report_views.xml',
-        # 'views/templates.xml',
+        'views/templates.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
