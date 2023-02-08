@@ -6,4 +6,4 @@ access_education_enrollment_employee,education.enrollment.employee,model_educati
 access_wizard_enrollment_multi_employee,wizard.enrollment.multi.employee,model_wizard_enrollment_multi,base.group_user,1,1,1,1
 access_academy_report_employee,academy.report.employee,model_academy_report,base.group_user,1,0,0,0
 access_res_ethnic_employee,res.ethnic.employee,model_res_ethnic,base.group_user,1,1,1,1
-access_academy_teacher_employee,academy.teacher.employee,model_academy_teachers,base.group_user,1,0,0,0
+access_academy_teacher_employee,academy.teacher.employee,model_academy_teachers,,1,0,0,0
